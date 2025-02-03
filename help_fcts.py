@@ -168,6 +168,34 @@ def kgf(x_te,x_tr,y_tr,sigma,t,hp3=None, y_te=None, auto=False, nu=100):
     return mse(y_te, fh_te), 0, None, None
   return fh_te, alphah
 
+def loocv_gcv(kr_fun, x_tr, y_tr, sigma, lbda, hp3=None, cv_type='gcv', nu=100):
+  fh_tr, alphah=kr_fun(x_tr, x_tr, y_tr, sigma, lbda, hp3, nu=nu)
+  K_tr=kern(x_tr,x_tr,sigma, nu)
+  n_tr=K_tr.shape[0]
+  In=np.eye(n_tr)
+  if kr_fun==kpr:
+    lbda_In=2*np.diag(lbda/(1e-12+np.max(np.abs(alphah)))*(np.abs(alphah)==np.max(np.abs(alphah))).flatten())
+  else:
+    lbda_In=lbda*In
+  H=K_tr@np.linalg.inv(K_tr+lbda_In)
+  if cv_type=='gcv':
+    return np.mean((y_tr-fh_tr)**2)/(1-np.trace(H)/n_tr)**2 #gcv
+  else:
+    return np.mean(((y_tr-fh_tr).flatten()/(1e-12+1-np.diag(H)))**2) #loocv
+
+def lgcv(x,y, sigmas, lbdas, hp3, kr_fun, cv_type, nu):
+  best_params=(np.inf,None,None)
+  iii=0
+  for sigma in sigmas:
+    iii+=1
+    sys.stdout.write(str(iii)+' '+str(np.round(sigma,3))+' '+str(np.round(best_params[0],3))+'\r')
+    sys.stdout.flush()
+    for lbda in lbdas:
+      mse_cv=loocv_gcv(kr_fun, x, y, sigma, lbda, hp3, cv_type, nu)
+      if mse_cv<best_params[0]:
+        best_params=(mse_cv, sigma, lbda, hp3)
+  return best_params[1], best_params[2], best_params[3]
+
 def cv10(x,y, sigmas, lbdas, hp3s, seed, kr_fun, nu):
   n=x.shape[0]
   np.random.seed(seed)

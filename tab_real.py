@@ -38,7 +38,7 @@ for nu_str in ['_0.5_', '_1.5_', '_2.5_', '_10_', '_100_']:
   tab1=[]
   
   fun_titles={'ksgd': 'KSGD', 'kpr': 'K$\\ell_\\infty$R', 'kmrh': 'KMR-H', 'kmrt': 'KMR-T', 'kqrz': 'KQR-A', 'kqrt': 'KQR-B', 'kgd': 'KGD', 'krr': 'KRR'}
-  data_titles={'airfoil': '\\makecell{Airfoil Sound\\\\Pressure}', 'house': '\\makecell{California\\\\House Values}', 'temp': '\\makecell{U.K.\\\\Temperature}', 'steel': '\\makecell{Steel Energy\\\\Consumption}', 'super': '\\makecell{Superconductor\\\\Critical\\\\Temperature}'}
+  data_titles={'airfoil': '\\makecell[l]{Airfoil Sound\\\\Pressure}', 'house': '\\makecell[l]{California\\\\House Values}', 'temp': '\\makecell[l]{U.K.\\\\Temperature}', 'steel': '\\makecell[l]{Steel Energy\\\\Consumption}', 'super': '\\makecell[l]{Superconductor\\\\Critical\\\\Temperature}'}
   
   seen_data=[]
   for data in data_sets:
@@ -99,12 +99,12 @@ for nu_str in ['_0.5_', '_1.5_', '_2.5_', '_10_', '_100_']:
       kernel_str=''
       n_mods='six'
     print('\\begin{table}')
-    print('\\caption{The 2.5th, 50th and 97.5th percentiles of computation time and test $R^2$ for the different methods and data sets, \\textbf{'+noise_str+'} amplified outliers' + kernel_str +'. The '+ n_mods +' robust methods perform very similarly in terms of test $R^2$, while KSGD performs one to two orders of magnitude faster.'+last_sent+'}')
+    print('\\caption{The 2.5th, 50th, and 97.5th percentiles of computation time and test $R^2$ for the different methods and data sets, \\textbf{'+noise_str+'} amplified outliers' + kernel_str +'. The '+ n_mods +' robust methods perform very similarly in terms of test $R^2$, while KSGD performs one to two orders of magnitude faster.'+last_sent+'}')
 
     print('\\center')
     print('\\begin{tabular}{l|l|l|l}')
     print('\\hline')
-    print('Data & Method & \\makecell{Computation Time [s]\\\\50\\%,\\ (2.5\\%,\\ 97.5\\%)} & \\makecell{Test $R^2$\\\\50\\%,\\ (2.5\\%,\\ 97.5\\%)}\\\\')
+    print('Data & Method & \\makecell[l]{Computation Time [s]\\\\50\\%,\\ (2.5\\%,\\ 97.5\\%)} & \\makecell[l]{Test $R^2$\\\\50\\%,\\ (2.5\\%,\\ 97.5\\%)}\\\\')
     print('\\hline')
     
     for t in tab:

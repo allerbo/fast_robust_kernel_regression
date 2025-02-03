@@ -1,5 +1,5 @@
 import numpy as np
-from help_fcts import r2, kgd, kpr, kmrh, kmrt, kqrz, kqrt, krr, cv10, make_data_real
+from help_fcts import r2, kgd, kpr, kmrh, kmrt, kqrz, kqrt, krr, cv10, make_data_real, lgcv
 import time
 import pickle
 import sys
@@ -87,4 +87,29 @@ for kr_name in kr_names:
 
 fi=open(REAL_DATA+'/'+data+'-'+str(cauchy)+'_'+str(nu)+'_'+str(seed)+'.pkl','wb')
 pickle.dump(data_dict,fi)
+fi.close()
+
+if not nu==100:
+  sys.exit()
+
+lgcv_dict={}
+for kr_name in ['kpr', 'krr']:
+  lgcv_dict[kr_name]={}
+  for cv_type in ['gcv', 'loocv']:
+    lgcv_dict[kr_name][cv_type]={}
+
+for kr_name in ['kpr', 'krr']:
+  for cv_type in ['gcv', 'loocv']:
+    t1=time.time()
+    sigma_opt, lbda_opt, hp3_opt = lgcv(X_tr, y_tr, sigmas, kr_dict[kr_name]['lbdas'], kr_dict[kr_name]['hp3s'][0], kr_dict[kr_name]['fun'], cv_type, nu)
+    fh = kr_dict[kr_name]['fun'](X_te, X_tr, y_tr, sigma_opt, lbda_opt, hp3_opt, nu=nu)[0]
+    lgcv_dict[kr_name][cv_type]['time']=time.time()-t1
+    lgcv_dict[kr_name][cv_type]['r2']=r2(y_te, fh)
+    lgcv_dict[kr_name][cv_type]['sigma']=sigma_opt
+    lgcv_dict[kr_name][cv_type]['lbda']=lbda_opt
+    lgcv_dict[kr_name][cv_type]['hp3']=hp3_opt
+    print(f'Data: {data:<7}. Alg: {kr_name:<4}. CV: {cv_type:<5}. Time: {time.time()-t1:<4.3g}. R2: {r2(y_te,fh):<+7.3g}. Sig: {sigma_opt:<4.3g}. Lbda: {lbda_opt:<4.3g}. HP3: {hp3_opt:<4}')
+
+fi=open(REAL_DATA+'/lgcv_'+data+'-'+str(cauchy)+'_'+str(nu)+'_'+str(seed)+'.pkl','wb')
+pickle.dump(lgcv_dict,fi)
 fi.close()

@@ -53,8 +53,8 @@ axss3[0,2].set_title('K$\\ell_1$R',fontsize=13)
 
 axss1[0,0].set_ylabel('$\\hat{f}$',fontsize=13)
 axss1[1,0].set_ylabel('$\\hat{f}$',fontsize=13)
-axss2[0,0].set_ylabel('$\\hat{\\alpha}$',fontsize=13)
-axss2[1,0].set_ylabel('$\\hat{\\alpha}$',fontsize=13)
+axss2[0,0].set_ylabel('$\\hat{\\alpha_i}$',fontsize=13)
+axss2[1,0].set_ylabel('$\\hat{\\alpha_i}$',fontsize=13)
 axss3[0,0].set_ylabel('$\\hat{f}$',fontsize=13)
 axss3[1,0].set_ylabel('$\\hat{f}$',fontsize=13)
 

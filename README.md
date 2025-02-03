@@ -10,8 +10,9 @@ python compare_pens.py
 python syn_expl.py
 ```
 
-## Tables 4-14:
+## Tables 4-7, 9-16:
 ```
 bash run_real.sh            #Calls real.py.
 python tab_real.py          #Uses data in real_data
+python tab_real_lgcv.py     #For Tables 6 and 7. Uses data in real_data.
 ```
