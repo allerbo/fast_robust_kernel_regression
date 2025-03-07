@@ -1,4 +1,4 @@
-This is the code used in the article **Fast Robust Kernel Regression through Sign Gradient Descent with Early Stopping**, available at http://arxiv.org/abs/2306.16838.
+This is the code used in the article **Fast Robust Kernel Regression through Sign Gradient Descent with Early Stopping**, available at https://projecteuclid.org/journals/electronic-journal-of-statistics/volume-19/issue-1/Fast-robust-kernel-regression-through-sign-gradient-descent-with-early/10.1214/25-EJS2361.full.
 
 ## Figures 1, 2 and 4:
 ```

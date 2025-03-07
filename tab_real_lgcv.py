@@ -86,7 +86,7 @@ for tab, noise in zip([tab0, tab1],['0','1']):
   elif noise=='0':
     noise_str='without'
   print('\\begin{table}')
-  print('\\caption{The 2.5th, 50th, and 97.5th percentiles of computation time and test $R^2$ for K$\\ell_\\infty$R in combination with LOOCV and GCV on the different data sets, \\textbf{'+noise_str+'} amplified outliers. Compared to 10-fold cross validation LOOCV and GCV perform faster, but the cost of decreased predictive performance, specially for K$\\ell_\\infty$R.}')
+  print('\\caption{The 2.5th, 50th, and 97.5th percentiles of computation time and test $R^2$ for K$\\ell_\\infty$R in combination with LOOCV and GCV on the different data sets, \\textbf{'+noise_str+'} amplified outliers. Compared to 10-fold cross validation LOOCV and GCV perform faster, but the cost of decreased predictive performance, especially for K$\\ell_\\infty$R.}')
 
   print('\\center')
   print('\\fontsize{7.9}{9.5}\\selectfont')
